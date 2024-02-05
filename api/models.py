@@ -18,7 +18,7 @@ class Company(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return self.name +" located at " + self.location
+        return self.name +" - " + self.location
 
 
 # Creating Employee Models
