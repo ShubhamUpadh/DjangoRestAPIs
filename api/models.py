@@ -16,3 +16,17 @@ class Company(models.Model):
     added_date = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
     objects = models.Manager()
+
+# Creating Employee Models
+
+class Employee(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=50)
+    address = models.CharField(max_length=200)
+    phone= models.CharField(max_length=10)
+    about = models.TextField()
+    position = models.CharField(max_length=50,choices=(('Manager','Manager'),
+                                                       ('Software Dev','SDE'),
+                                                       ('Project Leader','PL')))
+    company = models.ForeignKey(Company,on_delete=models.CASCADE)
+    objects = models.Manager()
