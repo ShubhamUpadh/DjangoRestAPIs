@@ -1,16 +1,16 @@
-from api.models import Company, Employee
 from rest_framework import viewsets
-from django.shortcuts import render
-from api.serializers import CompanySerializer, EmployeeSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
+
+from api.models import Company, Employee
+from api.serializers import CompanySerializer, EmployeeSerializer
 
 
 class CompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
 
-    #companies/{id}/employees
+    # companies/{id}/employees
     @action(detail=True, methods=['get'])
     def employees(self, request, pk=None):
         try:
@@ -19,7 +19,8 @@ class CompanyViewSet(viewsets.ModelViewSet):
             emps_serializer = EmployeeSerializer(emps, many=True, context={'request': request})
             return Response(emps_serializer.data)
         except Exception as e:
-            return Response({"message":e})
+            return Response({"message": e})
+
 
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
